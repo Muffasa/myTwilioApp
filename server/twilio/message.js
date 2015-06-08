@@ -5,7 +5,7 @@ var msg = {};
 msg.sendMsg = function(to, message, callback) {
   client.sendMessage({
     to: to,
-    from: '+16165225251', // your Twilio number
+    from: '+97243741132', // your Twilio number
     body: message // The body of the text message
   }, function(error, message) {
     // Log the response to DiskDB to auditing purposes

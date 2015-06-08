@@ -1,1 +1,1 @@
-module.exports = require('twilio')('XXXXXXXXX', 'XXXXXXXXX');
+module.exports = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH);
