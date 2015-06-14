@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var algo = require('./mini-algorithem/mini-algo');
 
 router.post('/sendmsg', function(req, res) {
   var resp = {};
@@ -28,15 +29,24 @@ router.post('/sendmsg', function(req, res) {
 router.post('/triggercall', function(req, res) {
   var resp = {};
   var call = req.body;
-  var camp=req.campain;
-  
-  if (!call || !call.to) {
+
+
+  if (!call || !call.to || !call.callMaker) {
     resp.status = "error";
     resp.message = "invalid data";
     res.json(resp);
   }
 
-  var twClient = require('../twilio/call').triggerCall(call.to, function(error, response) {
+var fixed_user = algo.isFixedUser(call.callMaker);
+var campain_url;
+if(fixed_user){
+  campain_url = algo.getCampainUrlByCampainName(call.callMaker.campain_url);
+}
+else {
+  campain_url = algo.getCampainUrl(call.callMaker);
+}
+
+  var twClient = require('../twilio/call').triggerCall(call.to,campain_url, function(error, response) {
     if (error) {
       resp.status = "error";
       resp.response = error;
@@ -50,35 +60,11 @@ router.post('/triggercall', function(req, res) {
 
 });
 
-router.post('/call/:id', function(req, res) {
+router.post('/call/:campain_url', function(req, res) {
   var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
 
-  var options = {
-    voice: 'woman',
-    language: 'en-gb'
-  };
-
-//  twiml.say('Hello! And welcome to the Twilio App..', options);
-
-  twiml.say('Hello Alon! And welcome to the money tunes demo App, maybe now that you hear how I speak, you will understand why i cant deliver a campain?', options);
-  // The id will help you customize the response per user. This was set in 
-  // Trigger call > call.js while trigerring the call 
-
-  if (req.params.id == '1') {
-    twiml
-      .say('Alon')
-      .say('this is Ohad, now you will hear a pir-so-met')
-//      .say('if you want to stop the pir-so-met, press 5')
-     // .play('http://46.101.148.83:3000/magic-chime-01.mp3') /** http://www.soundjay.com **/
-      .play('http://46.101.148.83:3000/toster.mp3') /** http://www.soundjay.com **/
-  } else {
-    twiml
-      .say('Waaaasssupppp!!')
-      .say('Now you will hear a sound', options)
-      .play('46.101.148.83/magic-chime-02.mp3') /** http://www.soundjay.com **/
-      .say('Yaaaayyyy!!', options);
-  }
+  twiml.play(req.params.campain_url)
 
   res.writeHead(200, {
     'Content-Type': 'text/xml'
@@ -88,7 +74,7 @@ router.post('/call/:id', function(req, res) {
 
 
 
-router.post('/incoming', function(req, res) {
+router.post('/incoming/:to', function(req, res) {
   var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
 
