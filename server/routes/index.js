@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var algo = require('./mini-algorithem/mini-algo');
+var algo = require('../mini-algorithem/mini-algo');
 
 router.post('/sendmsg', function(req, res) {
   var resp = {};
@@ -40,7 +40,7 @@ router.post('/triggercall', function(req, res) {
 var fixed_user = algo.isFixedUser(call.callMaker);
 var campain_url;
 if(fixed_user){
-  campain_url = algo.getCampainUrlByCampainName(call.callMaker.campain_url);
+  campain_url = algo.getCampainUrlByCampainName(call.callMaker.campain_name);
 }
 else {
   campain_url = algo.getCampainUrl(call.callMaker);
@@ -79,7 +79,7 @@ router.post('/incoming/:to', function(req, res) {
   var twiml = new twilio.TwimlResponse();
 
 
-  twiml.say('dont fucking mess with me bitch');
+  twiml.say('dont fucking mess with me bitch').play();
 
 
   res.writeHead(200, {

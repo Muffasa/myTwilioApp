@@ -1,7 +1,7 @@
 ///////units: corrency=$ , distance=meter, temperature=C;
-var Campain = require('../Campain.js');
+//var Campain = require('../Campain.js');
 
-var base_url = process.env.BASE_URL+"/campain-bank/";
+var base_url = "https://demo-muffasa.c9.io/campain-bank/";
 
 var GetLocation = function (campain){
   if(campain.optional_params.target_erea){
@@ -10,48 +10,51 @@ var GetLocation = function (campain){
   else {
     return [];
   }
-}
-var GetUrl = function (campain,caller_temperature){
-  if(campain.audios.count==1){
-    return audios[0];
+};
+
+var GetUrl = function () {
+  if(this.audios.length==1){
+    return this.audios[0];
   }
+  /*
   else {
     if(caller_temperature>campain.optional_params.active_temperatures[0] ||
       caller_temperature<campain.optional_params.active_temperatures[1]){
-      return this.audios[0];
+      return campain.audios[0];
     }
     else {
-      return this.audios[1];
+      return campain.audios[1];
     }
   }
+  */
+  return "Ohad";
+};
 
-}
-
-var campains = [
+var campains = {
 
     Tosafedrin:
     {
-    name:'tosafedrin Shiul_18s',
-    audios: [base_url+name+'.mp3'],
-    budjet: 1000,
-    Pay_Per_Second: 0.005,
-    Pay_Per_Full_Listen: 0.05,
-
-    optional_params:{
-    Pay_Per_Extra_Details: 0.1,
-    extra_details_active_button:'*',
-    target_languages: ['heb']
-  },
-
-    getLoacation:GetLocation,
-    getUrl:GetUrl
-
+        singelTon:this,    
+        name:'tosafedrin Shiul_18s',
+        audios: [base_url+'tosafedrin Shiul_18s'+'.mp3'],
+        budjet: 1000,
+        Pay_Per_Second: 0.005,
+        Pay_Per_Full_Listen: 0.05,
+    
+        optional_params:{
+            Pay_Per_Extra_Details: 0.1,
+            extra_details_active_button:'*',
+            target_languages: ['heb']
+        },
+    
+        getLoacation:GetLocation,
+        getUrl:GetUrl
    },
 
    NikeZoom:
    {
    name:'nike zoom_16s',
-   audios: [base_url+name+'.mp3'],
+   audios: [base_url+'nike zoom_16s'+'.mp3'],
    budjet: 1000,
    Pay_Per_Second: 0.005,
    Pay_Per_Full_Listen: 0.05,
@@ -72,7 +75,7 @@ var campains = [
   ParkUtopia:
   {
   name:'Park Utopia_20s',
-  audios: [base_url+name+'.mp3'],
+  audios: [base_url+'Park Utopia_20s'+'.mp3'],
   budjet: 1000,
   Pay_Per_Second: 0.005,
   Pay_Per_Full_Listen: 0.07,
@@ -95,7 +98,7 @@ var campains = [
  Dayatsu:
  {
  name:'dayatsu_14s',
- audios: [base_url+name+'.mp3'],
+ audios: [base_url+'dayatsu_14s'+'.mp3'],
  budjet: 1000,
  Pay_Per_Second: 0.005,
  Pay_Per_Full_Listen: 0.05,
@@ -118,7 +121,7 @@ var campains = [
  Horziza:
  {
  name:'Vodka Horziza_6s',
- audios: [base_url+name+'.mp3'],
+ audios: [base_url+'Vodka Horziza_6s'+'.mp3'],
  budjet: 1000,
  Pay_Per_Second: 0.005,
  Pay_Per_Full_Listen: 0.025,
@@ -138,7 +141,7 @@ var campains = [
 RedBull:
 {
 name:'Redbull_13s',
-audios: [base_url+name+'.mp3'],
+audios: [base_url+'Redbull_13s'+'.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.05,
@@ -158,7 +161,7 @@ getUrl:GetUrl
 Truma:
 {
 name:'hibuk rishon truma_23s',
-audios: [base_url+name+'.mp3'],
+audios: [base_url+'hibuk rishon truma_23s'+'.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.03,
@@ -180,7 +183,7 @@ getUrl:GetUrl
 Rambam:
 {
 name:'rambam yoldot_30s',
-audios: [base_url+name+'.mp3'],
+audios: [base_url+'rambam yoldot_30s'+'.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.3,
@@ -200,7 +203,7 @@ getUrl:GetUrl
 BodyShop:
 {
 name:'Body Shop_10s',
-audios: [base_url+name+'.mp3',base_url+name+' eng.mp3'],
+audios: [base_url+'Body Shop_10s'+'.mp3',base_url+'Body Shop_10s'+' eng.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.3,
@@ -231,7 +234,7 @@ AromaTelAviv:
 
     target_languages: ['heb','eng'],
     target_age: [15,0],
-    target_erea: ['lat':32.081713,'lon':34.773771,'radius':2500],//dizingoff gordon
+    target_erea: {'lat':32.081713,'lon':34.773771,'radius':2500},//dizingoff gordon
     active_temperatures: [-100,26]
   },
 
@@ -254,7 +257,7 @@ AromaTelAviv:
 //////////target info
        target_languages: ['heb','eng'],
        target_age: [15,200],
-       target_erea: ['lat':32.081713,'lon':34.773771,'radius':2500],//dizingoff gordon
+       target_erea: {'lat':32.081713,'lon':34.773771,'radius':2500},//dizingoff gordon
 ///////// global info
        active_temperatures: [-100,26]
      },
@@ -266,7 +269,7 @@ AromaTelAviv:
       Arab:
       {
             name:'Arab_10s',
-            audios: [base_url+name+'.mp3'],
+            audios: [base_url+'Arab_10s'+'.mp3'],
             budjet: 500,
             Pay_Per_Second: 0.003,
             Pay_Per_Full_Listen: 0.02,
@@ -282,7 +285,7 @@ AromaTelAviv:
      Rus:
      {
                  name:'Rus_14s',
-                 audios: [base_url+name+'.mp3'],
+                 audios: [base_url+'Rus_14s'+'.mp3'],
                  budjet: 500,
                  Pay_Per_Second: 0.003,
                  Pay_Per_Full_Listen: 0.02,
@@ -295,7 +298,7 @@ AromaTelAviv:
                  getUrl:GetUrl
      },
 ///////////experimental
-   {
+  Gumavir: {
     name:'Gumavir',///great!
     audios: ['http://studio21.co.il/Data/UploadedFiles/Video/419-sFile.swf'],
     budjet: 3000,
@@ -311,7 +314,7 @@ AromaTelAviv:
     getUrl:GetUrl
    },
 
-   {
+  Teletop: {
     name:'teletop',///great -
     audios: ['http://studio21.co.il/Data/UploadedFiles/Video/281-sFile.swf'],
     budjet: 1000,
@@ -320,7 +323,7 @@ AromaTelAviv:
 
     optional_params:{
     Pay_Per_Extra_Details: 0.2,
-    extra_details_active_button='*';
+    extra_details_active_button:'*',
 
 
     target_languages: ['heb'],
@@ -333,6 +336,6 @@ AromaTelAviv:
 
 
 
-];
+};
 
 module.exports = campains;

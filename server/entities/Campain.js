@@ -10,7 +10,7 @@ function Campain(name,audios,budjet,PPS,PPFL){
   this.Pay_Per_Second=PPS;
   this.Pay_Per_Full_Listen = PPFL;
 
-  this.optional params{
+  this.optional_params{
      pricing_params:{},
        /*
        Pay_Per_Extra_Details,

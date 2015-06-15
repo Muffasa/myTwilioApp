@@ -1,23 +1,15 @@
 
-var Weather = require("weather");
-var campains = require("../campains");
-var user_profiles = require("../user_profiles");
+var campains = require('../campains/campains');
+var user_profiles = require("../user_profiles/user-profiles");
 var algo = {};
 
 algo.getCampainUrl = function (callMaker){
 
-    var result = process.env.BASE_URL;
+    var result = 'https://demo-muffasa.c9.io';
 
   if(!callMaker){
     return returnDefaultUrl();
     }
-
-  user_profiles.forEach(function (profile){
-    if(profile.name == callMaker.name && profile.campain){
-      return profile.campain.getUrl(campain,caller_temperature,caller_language);
-    };
-  });
-
 
 
 
@@ -64,7 +56,7 @@ else {
 
 
 
-}
+};
 
 algo.getCampainNameByUserName = function(caller_name){
   user_profiles.forEach(function(userP){
@@ -72,25 +64,43 @@ algo.getCampainNameByUserName = function(caller_name){
       return userP.campain_name;
     }
   })
-}
+};
 
 algo.getCampainUrlByCampainName = function(campain_name){
+  
+  var campain;
+    for (campain in campains){
+        if(campain_name==campains[campain].name){
+      return campains[campain].getUrl();
+    }
+  }
+  
   campains.forEach(function(campain){
     if(campain.name==campain_name){
       return campain.getUrl();
     }
   })
-}
+};
 
 algo.isFixedUser = function(user_profile){
-  user_profiles.forEach(function(userP){
-    if(user_profile==userP){
+  
+  
+  for (var i=0;i<user_profiles.length;i++){
+        if(user_profile.name==user_profiles[i].name && user_profiles[i].location.lat==user_profile.location.lat){
+      return true;
+    }
+  }
+  
+  
+  return false;
+  /*user_profiles.forEach(function(userP){
+    if(user_profile.name==userP.name && userP.location.lat==user_profile.location.lat){
       return true;
     }
   });
-  return false;
+  return false;*/
 
-}
+};
 
 function returnDefaultUrl(){
   var result = process.env.BASE_URL;
@@ -101,12 +111,34 @@ function returnDefaultUrl(){
     result+='/campain-bank/ElAl_8s.mp3'
   }
   return result;
+  };
+
+
+function getTemperature(GeoLoc){
+  
+  var xhr = new XMLHttpRequest();
+  
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+        var json_res =JSON.parse(xhr.responseText);
+        return json_res.base.main.temp - 273.15;
+    }
   }
+  
+  xhr.open("GET","http://api.openweathermap.org/data/2.5/weather?lat="+GeoLoc.lat+"&lon="+GeoLoc.lon,false);
+    
+  
+  /*JSONRequest.get(
+    "http://api.openweathermap.org/data/2.5/weather?lat="+GeoLoc.lat+"&lon="+GeoLoc.lon,
+    function (requestNumber, value, exception) {
+        if (value) {
+            return value.base.main.temp - 273.15; //(Kelvin Celcius)
+        } else {
+            return 25;
+        }
+    }
+); */
 
-
-function getTemperature(city){
-  Weather.getCurrent(city, function(current) {
-  return current.temperature()});
 };
 
 function getDistance(loc1,loc2){

@@ -1,3 +1,6 @@
+
+global.BASE_PATH = __dirname + '/';
+var path = require("path");
 var express = require('express');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
