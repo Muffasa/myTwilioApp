@@ -13,7 +13,7 @@ var user_profiles =
     "gender": "male",
     "age": "42",
     "location": {"lat":"32.081713","lon":"34.773771"},
-    "campain_name": "tosafedrin Shiul_18s"
+    "campain_name": "tosafedrin_Shiul_18s"
   },
 
   {

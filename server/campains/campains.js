@@ -1,7 +1,7 @@
 ///////units: corrency=$ , distance=meter, temperature=C;
 //var Campain = require('../Campain.js');
 
-var base_url = "https://demo-muffasa.c9.io/campain-bank/";
+var base_url = "https://demo-muffasa.c9.io/";
 
 var GetLocation = function (campain){
   if(campain.optional_params.target_erea){
@@ -34,9 +34,9 @@ var campains = {
 
     Tosafedrin:
     {
-        singelTon:this,    
-        name:'tosafedrin Shiul_18s',
-        audios: [base_url+'tosafedrin Shiul_18s'+'.mp3'],
+        ID:1,    
+        name:'tosafedrin_Shiul_18s',
+        audios: [base_url+'tosafedrin_Shiul_18s'+'.mp3'],
         budjet: 1000,
         Pay_Per_Second: 0.005,
         Pay_Per_Full_Listen: 0.05,
@@ -53,8 +53,9 @@ var campains = {
 
    NikeZoom:
    {
-   name:'nike zoom_16s',
-   audios: [base_url+'nike zoom_16s'+'.mp3'],
+       ID:2,  
+   name:'nike_zoom_16s',
+   audios: [base_url+'nike_zoom_16s'+'.mp3'],
    budjet: 1000,
    Pay_Per_Second: 0.005,
    Pay_Per_Full_Listen: 0.05,
@@ -74,8 +75,9 @@ var campains = {
 
   ParkUtopia:
   {
-  name:'Park Utopia_20s',
-  audios: [base_url+'Park Utopia_20s'+'.mp3'],
+      ID:3,  
+  name:'Park_Utopia_20s',
+  audios: [base_url+'Park_Utopia_20s'+'.mp3'],
   budjet: 1000,
   Pay_Per_Second: 0.005,
   Pay_Per_Full_Listen: 0.07,
@@ -97,6 +99,7 @@ var campains = {
 
  Dayatsu:
  {
+     ID:4,
  name:'dayatsu_14s',
  audios: [base_url+'dayatsu_14s'+'.mp3'],
  budjet: 1000,
@@ -120,8 +123,9 @@ var campains = {
 
  Horziza:
  {
- name:'Vodka Horziza_6s',
- audios: [base_url+'Vodka Horziza_6s'+'.mp3'],
+     ID:5,
+ name:'Vodka_Horziza_6s',
+ audios: [base_url+'Vodka_Horziza_6s'+'.mp3'],
  budjet: 1000,
  Pay_Per_Second: 0.005,
  Pay_Per_Full_Listen: 0.025,
@@ -140,6 +144,7 @@ var campains = {
 
 RedBull:
 {
+    ID:6,
 name:'Redbull_13s',
 audios: [base_url+'Redbull_13s'+'.mp3'],
 budjet: 1000,
@@ -160,8 +165,9 @@ getUrl:GetUrl
 
 Truma:
 {
-name:'hibuk rishon truma_23s',
-audios: [base_url+'hibuk rishon truma_23s'+'.mp3'],
+    ID:7,
+name:'hibuk_rishon_truma_23s',
+audios: [base_url+'hibuk_rishon_truma_23s'+'.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.03,
@@ -182,8 +188,9 @@ getUrl:GetUrl
 
 Rambam:
 {
-name:'rambam yoldot_30s',
-audios: [base_url+'rambam yoldot_30s'+'.mp3'],
+    ID:8,
+name:'rambam_yoldot_30s',
+audios: [base_url+'rambam_yoldot_30s'+'.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.3,
@@ -202,8 +209,9 @@ getUrl:GetUrl
 
 BodyShop:
 {
-name:'Body Shop_10s',
-audios: [base_url+'Body Shop_10s'+'.mp3',base_url+'Body Shop_10s'+' eng.mp3'],
+    ID:9,
+name:'Body_Shop_10s',
+audios: [base_url+'Body_Shop_10s'+'.mp3',base_url+'Body_Shop_10s'+' eng.mp3'],
 budjet: 1000,
 Pay_Per_Second: 0.005,
 Pay_Per_Full_Listen: 0.3,
@@ -222,8 +230,9 @@ getUrl:GetUrl
 
 AromaTelAviv:
 {
+    ID:10,
     name:'Aroma dizingoff gordon Kafe And Maafe/icecoffe',
-    audios: [base_url+'Aroma dizingoff gordon_8s.mp3',base_url+'Aroma dizingoff gordon warm_8s.mp3'],
+    audios: [base_url+'Aroma_dizingoff_gordon_8s.mp3',base_url+'Aroma_dizingoff_gordon_warm_8s.mp3'],
     budjet: 500,
     Pay_Per_Second: 0.003,
     Pay_Per_Full_Listen: 0.02,
@@ -244,8 +253,9 @@ AromaTelAviv:
 
  AromaBeerSheva:
  {
+     ID:11,
        name:'Aroma Big Kafe And Maafe/icecoffe',
-       audios: [base_url+'Aroma Big Beer-Sheva_8s.mp3',base_url+'Aroma Big Beer-Sheva Worm_8s.mp3'],
+       audios: [base_url+'Aroma_Big_Beer-Sheva_8s.mp3',base_url+'Aroma_Big_Beer-Sheva_Worm_8s.mp3'],
        budjet: 500,
        Pay_Per_Second: 0.003,
        Pay_Per_Full_Listen: 0.02,
@@ -268,6 +278,7 @@ AromaTelAviv:
 
       Arab:
       {
+          ID:12,
             name:'Arab_10s',
             audios: [base_url+'Arab_10s'+'.mp3'],
             budjet: 500,
@@ -284,6 +295,7 @@ AromaTelAviv:
 
      Rus:
      {
+         ID:13,
                  name:'Rus_14s',
                  audios: [base_url+'Rus_14s'+'.mp3'],
                  budjet: 500,
@@ -299,6 +311,7 @@ AromaTelAviv:
      },
 ///////////experimental
   Gumavir: {
+      ID:14,
     name:'Gumavir',///great!
     audios: ['http://studio21.co.il/Data/UploadedFiles/Video/419-sFile.swf'],
     budjet: 3000,
@@ -315,6 +328,7 @@ AromaTelAviv:
    },
 
   Teletop: {
+      ID:15,
     name:'teletop',///great -
     audios: ['http://studio21.co.il/Data/UploadedFiles/Video/281-sFile.swf'],
     budjet: 1000,

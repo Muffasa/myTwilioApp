@@ -37,16 +37,16 @@ router.post('/triggercall', function(req, res) {
     res.json(resp);
   }
 
-var fixed_user = algo.isFixedUser(call.callMaker);
-var campain_url;
-if(fixed_user){
-  campain_url = algo.getCampainUrlByCampainName(call.callMaker.campain_name);
-}
-else {
-  campain_url = algo.getCampainUrl(call.callMaker);
-}
+    var fixed_user = algo.isFixedUser(call.callMaker);
+    var campain_ID;
+      if(fixed_user){
+      campain_ID = algo.getCampainIDByCampainName(call.callMaker.campain_name);
+      }
+      else {
+      campain_ID = algo.getCampainIDFromUserData(call.callMaker);
+      }
 
-  var twClient = require('../twilio/call').triggerCall(call.to,campain_url, function(error, response) {
+  var twClient = require('../twilio/call').triggerCall(call.to,campain_ID, function(error, response) {
     if (error) {
       resp.status = "error";
       resp.response = error;
@@ -56,15 +56,17 @@ else {
     }
 
     res.json(resp);
-  })
+  });
 
 });
 
-router.post('/call/:campain_url', function(req, res) {
+router.post('/call/:campain_ID', function(req, res) {
   var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
 
-  twiml.play(req.params.campain_url)
+  var campain_audio_address = algo.getCampainUrlByCampainID(req.params.campain_ID);
+
+  twiml.play(campain_audio_address)
 
   res.writeHead(200, {
     'Content-Type': 'text/xml'

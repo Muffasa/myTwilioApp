@@ -3,7 +3,7 @@ var campains = require('../campains/campains');
 var user_profiles = require("../user_profiles/user-profiles");
 var algo = {};
 
-algo.getCampainUrl = function (callMaker){
+algo.getCampainIDFromUserData = function (callMaker){
 
     var result = 'https://demo-muffasa.c9.io';
 
@@ -66,20 +66,35 @@ algo.getCampainNameByUserName = function(caller_name){
   })
 };
 
-algo.getCampainUrlByCampainName = function(campain_name){
+algo.getCampainUrlByCampainID = function(campain_ID){
   
   var campain;
     for (campain in campains){
-        if(campain_name==campains[campain].name){
+        if(campain_ID==campains[campain].ID){
       return campains[campain].getUrl();
     }
   }
   
-  campains.forEach(function(campain){
-    if(campain.name==campain_name){
-      return campain.getUrl();
+};
+
+algo.getCampainIDByCampainName = function(campain_name){
+  var campain;
+    for (campain in campains){
+        if(campain_name==campains[campain].name){
+      return campains[campain].ID;
     }
-  })
+  }
+};
+
+algo.getCampainUrlByCampainID = function(campain_id){
+  
+  var campain;
+    for (campain in campains){
+        if(campain_id==campains[campain].ID){
+      return campains[campain].getUrl();
+    }
+  }
+  
 };
 
 algo.isFixedUser = function(user_profile){
