@@ -97,6 +97,14 @@ algo.getCampainUrlByCampainID = function(campain_id){
   
 };
 
+algo.getUserProfiles = function(){
+  return user_profiles;
+};
+algo.getCampains = function(){
+  return campains;
+};
+
+
 algo.isFixedUser = function(user_profile){
   
   

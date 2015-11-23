@@ -9,10 +9,11 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static(path.join(process.cwd(), 'campain-bank')));
 
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true 
 }));
 app.use(cookieParser());
 

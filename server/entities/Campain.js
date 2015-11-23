@@ -1,110 +1,73 @@
 
 
 
-function Campain(name,audios,budjet,PPS,PPFL){
+function Campain(name,campain_audio,budget,PPS,PPFL){
   ///////crutial params:
   this.id;
-  this.name = name;
-  this.audios=audios;
-  this.budjet=budjet;
+  this.Name = name;
+  this.Active=true;
+  this.Audio=campain_audio;
+  this.budget=budget;
   this.Pay_Per_Second=PPS;
   this.Pay_Per_Full_Listen = PPFL;
 
-  this.optional_params{
-     pricing_params:{},
-       /*
-       Pay_Per_Extra_Details,
-       extra_details_active_button,
-       Pay_Per_Deal,
-       deal_active_button
-       */
+  this.optional_params={
+     pricing_params:{
+       Extra_Deatles:{
+         
+       },
+       Deal:{
+         
+       }
+     },
 
-     target_params:{},
-     /*
-       target_languages,
-       target_gender,
-       terget_age,
-       target_erea
-            .
-            .
-            current speed (driving/walking)
-     */
+     target_params:{
+     
+       target_gender:'',
+       terget_age:'',
+       target_erea:'',
+       TPetc:''
+           // .
+           // .
+           // current speed (driving/walking)
+     },
 
-     global_params{}
-     /*
-       active_at_dates, //(active days in a week,vications,hollydays...)
-       active_at_local_temperatures,
-       active_at_client_temperatures,
-
-             .
-             .
-
-    */
+     global_params:{
+     
+       active_at_dates:'', 
+       active_at_local_temperatures:'',
+       active_at_client_temperatures:'',
+       GPetc:''
+             
+    }
 
 };
   //////////////
 
-  this.dailyUpdate = function (){
+  Campain.prototype.dailyUpdate = function (){
 
-  }
+  };
 
-  this.isAvtive = function (){
+  Campain.prototype.isAvtive = function (){
     if(this.Active==false || this.budjet<this.PPL*100){
       return false;
     }
     else {
-      this.dailyUpdate()
-      if( || ){
-        return false;
-      }
+      return true;
     }
-  }
-  this.getLocation = function (){
-    return this.optional_params.target_params
+  };
+  Campain.prototype.getLocation = function (){
+    return this.optional_params.target_params.target_erea.Location;
   }
 
-  this.getUrl=function (client_current_temperatur){
-    if(this.audio.count==1){
-      return this.audio[0];
-    }
-    else {
-      if(temperatur>this.active_temperatures[0]||temperatur<this.active_temperatures[1]){
-        return this.audio[0];
-      }
-      else {
-        return this.audio[1];
-      }
-    }
+  Campain.prototype.getAudio=function (){
+    
+    return this.Audio.AudioFile;
 
   }
 
 };
 
-/*function PPL(timeUnit,priceUnit){
-  this.timeUnit=timeUnit;
-  this.priceUnit=priceUnit;
 
-  this.TimeLine = {1:0.01,5:0.03,9:0.1};
-
-  this.getPPL= function(caller_listen_time)
-  {
-    var time_om_air=caller_listen_time;
-
-    if(this.timeUnit != 'sec'){
-      time_om_air=ConvertTime(this.timeUnit);
-    }
-
-    TimeLine.forEach(function(part){
-
-      if(time_om_air>TimeLine[TimeLine.lenth])
-      {
-        return TimeLine[TimeLine.lenth]
-      }
-
-
-    })
-  }
-
-}*/
 
 module.exports = Campain;

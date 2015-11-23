@@ -15,7 +15,7 @@ angular.module('mytwilioapp', ['ionic'])
 
 .factory('API', function($http) {
   var api = {};
-  var baseURL = 'http://5935c388.ngrok.com';
+  var baseURL = 'https://demo-muffasa.c9.io';
 
   api.sendMsg = function(to, text) {
     return $http.post(baseURL + '/sendmsg', {
